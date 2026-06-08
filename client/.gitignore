@@ -1,0 +1,24 @@
+# See .gitignore for full list
+
+# Dependencies
+node_modules/
+__pycache__/
+venv/
+
+# Environment
+.env
+.env.local
+
+# Build
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store

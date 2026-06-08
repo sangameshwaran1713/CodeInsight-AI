@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # React Frontend
+  client:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+    networks:
+      - codeinsight-network
+
+  # Node.js Backend
+  server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - AI_SERVICE_URL=http://ai-service:8000
+    depends_on:
+      - ai-service
+    networks:
+      - codeinsight-network
+
+  # Python AI Service
+  ai-service:
+    build:
+      context: ../ai-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4-turbo-preview}
+    networks:
+      - codeinsight-network
+
+networks:
+  codeinsight-network:
+    driver: bridge

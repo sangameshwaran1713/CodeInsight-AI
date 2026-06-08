@@ -1,0 +1,34 @@
+ai_integration:
+  module: anti_gravity
+  enabled: true
+
+  model:
+    name: gravity-control-ai
+    version: 1.0
+
+  parameters:
+    gravity_field_strength: 0.0
+    counter_force: auto
+    stabilization: true
+
+  safety:
+    override_other_modules: false
+    isolated_execution: true
+
+models:
+  - name: ollama-gpt-oss
+    provider: ollama
+    model: gpt-oss:120b-cloud
+    apiBase: http://localhost:11434
+
+  - name: openai-gpt
+    provider: openai
+    model: gpt-4o-mini
+    apiKey: ${OPENAI_API_KEY}
+
+defaultModel: ollama-gpt-oss
+
+tabAutocompleteModel:
+  provider: ollama
+  model: gpt-oss:120b-cloud
+  apiBase: http://localhost:11434

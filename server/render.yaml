@@ -1,0 +1,61 @@
+# Render.com Blueprint Specification
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Node.js Backend API
+  - type: web
+    name: codeinsight-api
+    runtime: node
+    region: oregon
+    plan: starter
+    branch: main
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: node src/app.js
+    healthCheckPath: /health
+    
+    envVars:
+      # Server
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      
+      # MongoDB Atlas
+      - key: MONGODB_URI
+        sync: false
+      
+      # JWT Secret
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      
+      # AI Service URL (Railway)
+      - key: AI_SERVICE_URL
+        sync: false
+      
+      # Frontend URL (Vercel)
+      - key: FRONTEND_URL
+        sync: false
+      
+      # CORS
+      - key: CORS_ORIGINS
+        sync: false
+      
+      # Rate Limiting
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX
+        value: 100
+    
+    # Auto-scaling settings
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetMemoryPercent: 80
+      targetCPUPercent: 80
+    
+    # Preview environments
+    previews:
+      generation: automatic

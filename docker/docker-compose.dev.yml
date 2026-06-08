@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # React Frontend (Development)
+  client:
+    build:
+      context: ../client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../client:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - server
+    networks:
+      - codeinsight-dev
+
+  # Node.js Backend (Development)
+  server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../server:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongo:27017/codeinsight}
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-key}
+      - AI_SERVICE_URL=http://ai-service:8000
+      - CORS_ORIGIN=http://localhost:3000
+    depends_on:
+      - mongo
+      - ai-service
+    networks:
+      - codeinsight-dev
+
+  # Python AI Service (Development)
+  ai-service:
+    build:
+      context: ../ai-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../ai-service:/app
+    environment:
+      - DEBUG=true
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4-turbo-preview}
+    networks:
+      - codeinsight-dev
+
+  # MongoDB (Development)
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - codeinsight-dev
+
+  # Mongo Express (DB Admin UI)
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/
+    depends_on:
+      - mongo
+    networks:
+      - codeinsight-dev
+
+volumes:
+  mongo-data:
+
+networks:
+  codeinsight-dev:
+    driver: bridge
