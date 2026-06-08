@@ -14,7 +14,7 @@ exports.getUsers = async (req, res, next) => {
     const status = req.query.status || '';
 
     // Build query
-    let query = {};
+    const query = {};
     
     if (search) {
       query.$or = [

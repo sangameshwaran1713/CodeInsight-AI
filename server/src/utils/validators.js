@@ -102,7 +102,7 @@ const validateCode = (code, options = {}) => {
   }
 
   // Check for binary content
-  if (code.includes('\x00')) {
+  if (/\x00/.test(code)) {
     return { isValid: false, error: 'Code contains binary content' };
   }
 
@@ -402,7 +402,7 @@ const sanitizeString = (value, options = {}) => {
   }
 
   if (removeNullBytes) {
-    result = result.replace(/\x00/g, '');
+    result = result.replace(/\x00/gu, '');
   }
 
   if (maxLength && result.length > maxLength) {

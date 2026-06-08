@@ -62,7 +62,9 @@ const corsOptions = {
     }
     
     const isAllowed = allowedOrigins.some(allowed => {
-      if (allowed instanceof RegExp) return allowed.test(origin);
+      if (allowed instanceof RegExp) {
+        return allowed.test(origin);
+      }
       return allowed === origin;
     });
 
@@ -118,7 +120,7 @@ const aiService = require('./services/ai.service');
 const { protect } = require('./middleware/auth.middleware');
 
 // Health check endpoint - checks Node.js server (protected in production)
-const healthProtection = process.env.NODE_ENV === 'production' ? protect : (req, res, next) => next();
+const healthProtection = process.env.NODE_ENV === 'production' ? protect : (_req, _res, next) => next();
 
 app.get('/health', healthProtection, (req, res) => {
   res.status(200).json({ 
@@ -156,7 +158,6 @@ app.get('/health/full', healthProtection, async (req, res) => {
 
 // Unified analyze endpoint
 const { analyze, analyzeWithFile } = require('./controllers/analysis.controller');
-const { analysisValidation } = require('./middleware/validation.middleware');
 const upload = require('./middleware/upload.middleware');
 
 // POST /api/analyze - accepts JSON body or multipart form with file
