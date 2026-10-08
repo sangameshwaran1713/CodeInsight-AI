@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiLock, FiCode, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield } from 'react-icons/fi';
 import toast from 'react-hot-toast';
-import { Component as ShieldShader } from '@/components/ui/shield-shader';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -50,149 +49,154 @@ const Register = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-[calc(100vh-4rem)]">
+      
+      {/* Soft Ambient Radial Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[450px] bg-primary-500/10 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Shader background - full screen */}
-      <div className="absolute inset-0 z-0">
-        <ShieldShader />
-      </div>
-
-      {/* Dark overlay so the form stays readable */}
-      <div className="absolute inset-0 z-10 bg-black/40" />
-
-      {/* Form */}
-      <div className="relative z-20 flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 animate-fade-in">
-        <div className="text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-primary-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/30 animate-float">
-              <FiCode className="w-10 h-10 text-white" />
-            </div>
-          </div>
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
-            Create an account
+      <div className="max-w-md w-full space-y-6 relative z-10 animate-fade-in">
+        
+        {/* Header Title Section */}
+        <div className="text-center pb-2">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Create an <span className="bg-gradient-to-r from-white via-primary-300 to-ivory-100 bg-clip-text text-transparent">Account</span>
           </h2>
-          <p className="mt-3 text-dark-400 text-lg">
-            Start analyzing your code with AI
-          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5 animate-slide-up animation-delay-200">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-dark-400 mb-2">
-              Full name
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FiUser className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+        {/* Register Card */}
+        <div className="bg-dark-900/90 border border-primary-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-2xl relative overflow-hidden group">
+          
+          {/* Subtle Top Glowing Line Accent */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-500/60 to-transparent" />
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Full Name */}
+            <div>
+              <label htmlFor="name" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider mb-1.5">
+                Full Name
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiUser className="h-4 w-4" />
+                </div>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-4 py-2.5 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="John Doe"
+                />
               </div>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                placeholder="John Doe"
-              />
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-dark-400 mb-2">
-              Email address
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FiMail className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+            {/* Email Address */}
+            <div>
+              <label htmlFor="email" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider mb-1.5">
+                Email Address
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiMail className="h-4 w-4" />
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-4 py-2.5 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="you@example.com"
+                />
               </div>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                placeholder="you@example.com"
-              />
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-dark-400 mb-2">
-              Password
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FiLock className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider mb-1.5">
+                Password
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiLock className="h-4 w-4" />
+                </div>
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-10 py-2.5 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="Min. 12 chars (A-z, 0-9, @#$%)"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-dark-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
+                </button>
               </div>
-              <input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 pr-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-dark-400 hover:text-white transition-colors"
-              >
-                {showPassword ? <FiEyeOff className="h-5 w-5" /> : <FiEye className="h-5 w-5" />}
-              </button>
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-dark-400 mb-2">
-              Confirm password
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FiLock className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider mb-1.5">
+                Confirm Password
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiLock className="h-4 w-4" />
+                </div>
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-10 py-2.5 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="Re-enter password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-dark-400 hover:text-white transition-colors"
+                >
+                  {showConfirmPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
+                </button>
               </div>
-              <input
-                id="confirmPassword"
-                type={showConfirmPassword ? 'text' : 'password'}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 pr-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-dark-400 hover:text-white transition-colors"
-              >
-                {showConfirmPassword ? <FiEyeOff className="h-5 w-5" /> : <FiEye className="h-5 w-5" />}
-              </button>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 bg-gradient-to-r from-purple-500 to-primary-600 hover:from-purple-400 hover:to-primary-500 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all flex items-center justify-center hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {loading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-            ) : (
-              'Create account'
-            )}
-          </button>
-        </form>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-dark-950 font-bold text-xs shadow-glow-primary rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed mt-3"
+            >
+              {loading ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-dark-950 border-t-transparent" />
+              ) : (
+                <>
+                  <span>Create Account & Continue</span>
+                  <FiArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
 
-        <p className="text-center text-dark-400">
+        </div>
+
+        {/* Login Redirect Footer */}
+        <p className="text-center text-dark-400 text-xs">
           Already have an account?{' '}
-          <Link to="/login" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">
+          <Link to="/login" className="text-primary-400 hover:text-primary-300 font-semibold transition-colors">
             Sign in
           </Link>
         </p>
-        </div> {/* max-w-md */}
-      </div> {/* flex container */}
+
+      </div>
     </div>
   );
 };

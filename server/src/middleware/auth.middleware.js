@@ -73,9 +73,9 @@ const requirePermission = (...permissions) => {
   return (req, res, next) => {
     const userRole = req.user.role;
     const userCustomPermissions = req.user.permissions || [];
-    
+
     // Check if user has ANY of the required permissions
-    const hasRequiredPermission = permissions.some(permission => 
+    const hasRequiredPermission = permissions.some(permission =>
       hasPermission(userRole, permission) || userCustomPermissions.includes(permission)
     );
 

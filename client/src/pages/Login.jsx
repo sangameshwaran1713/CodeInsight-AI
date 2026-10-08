@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiCode, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiKey } from 'react-icons/fi';
 import toast from 'react-hot-toast';
-import { Component as ShieldShader } from '@/components/ui/shield-shader';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ const Login = () => {
     setLoading(true);
     try {
       await login(email, password);
-      toast.success('Welcome back!');
+      toast.success('Welcome back to CodeInsight.AI!');
       navigate('/dashboard');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed');
@@ -27,49 +26,42 @@ const Login = () => {
     }
   };
 
+  const handleFillDemo = () => {
+    setEmail('mmm@gmail.com');
+    setPassword('SecurePass123!');
+    toast.success('Demo credentials loaded!');
+  };
+
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-[calc(100vh-4rem)]">
+      
+      {/* Soft Ambient Radial Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[450px] bg-primary-500/10 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Shader background - full screen */}
-      <div className="absolute inset-0 z-0">
-        <ShieldShader />
-      </div>
+      <div className="max-w-md w-full space-y-6 relative z-10 animate-fade-in">
+        
+        {/* Header Title Section */}
+        <div className="text-center pb-2">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Welcome <span className="bg-gradient-to-r from-white via-primary-300 to-ivory-100 bg-clip-text text-transparent">Back</span>
+          </h2>
+        </div>
 
-      {/* Dark overlay so the form stays readable */}
-      <div className="absolute inset-0 z-10 bg-black/40" />
+        {/* Login Card */}
+        <div className="bg-dark-900/90 border border-primary-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-2xl relative overflow-hidden group">
+          
+          {/* Subtle Top Glowing Line Accent */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-500/60 to-transparent" />
 
-      {/* Login form */}
-      <div className="relative z-20 flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8 animate-fade-in">
-
-          {/* Header */}
-          <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-primary-500/30 animate-float">
-                <FiCode className="w-10 h-10 text-white" />
-              </div>
-            </div>
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-primary-200 to-white bg-clip-text text-transparent">
-              Welcome back
-            </h2>
-            <p className="mt-3 text-dark-400 text-lg">
-              Sign in to your account to continue
-            </p>
-          </div>
-
-          {/* Form card */}
-          <form
-            onSubmit={handleSubmit}
-            className="glass-card p-8 space-y-6 animate-slide-up animation-delay-200 backdrop-blur-md bg-black/30 border border-white/10 rounded-2xl"
-          >
-            {/* Email */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-dark-400 mb-2">
-                Email address
+              <label htmlFor="email" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider mb-2">
+                Email Address
               </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <FiMail className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiMail className="h-4 w-4" />
                 </div>
                 <input
                   id="email"
@@ -77,28 +69,28 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                  placeholder="you@example.com"
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-4 py-3 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="name@company.com"
                 />
               </div>
             </div>
 
-            {/* Password */}
+            {/* Password Field */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label htmlFor="password" className="block text-sm font-medium text-dark-400">
+                <label htmlFor="password" className="block text-xs font-semibold text-dark-300 uppercase tracking-wider">
                   Password
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-primary-400 hover:text-primary-300 transition-colors"
+                  className="text-xs text-primary-400 hover:text-primary-300 font-medium transition-colors"
                 >
                   Forgot password?
                 </Link>
               </div>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <FiLock className="h-5 w-5 text-dark-400 group-focus-within:text-primary-400 transition-colors" />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-dark-400 group-focus-within:text-primary-400 transition-colors">
+                  <FiLock className="h-4 w-4" />
                 </div>
                 <input
                   id="password"
@@ -106,42 +98,58 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full bg-dark-300/50 text-white rounded-xl px-4 py-3.5 pl-12 pr-12 border border-dark-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all placeholder-dark-500"
-                  placeholder="••••••••"
+                  className="w-full bg-dark-950/90 text-white text-sm rounded-xl pl-10 pr-10 py-3 border border-dark-800 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all placeholder-dark-500 font-sans"
+                  placeholder="••••••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-dark-400 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-dark-400 hover:text-white transition-colors"
                 >
-                  {showPassword ? <FiEyeOff className="h-5 w-5" /> : <FiEye className="h-5 w-5" />}
+                  {showPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-primary-500 to-purple-600 hover:from-primary-400 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 transition-all flex items-center justify-center hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-dark-950 font-bold text-xs shadow-glow-primary rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
             >
               {loading ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-dark-950 border-t-transparent" />
               ) : (
-                'Sign in'
+                <>
+                  <span>Sign In to Dashboard</span>
+                  <FiArrowRight className="w-4 h-4" />
+                </>
               )}
             </button>
           </form>
 
-          {/* Register link */}
-          <p className="text-center text-dark-400">
-            Don't have an account?{' '}
-            <Link to="/register" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">
-              Sign up
-            </Link>
-          </p>
+          {/* Quick Demo Credentials Autofill Action */}
+          <div className="mt-5 pt-5 border-t border-dark-800/80 text-center">
+            <button
+              type="button"
+              onClick={handleFillDemo}
+              className="inline-flex items-center space-x-1.5 text-xs text-dark-400 hover:text-primary-300 transition-colors bg-dark-950/60 hover:bg-dark-950 px-3 py-1.5 rounded-lg border border-dark-800"
+            >
+              <FiKey className="w-3.5 h-3.5 text-primary-400" />
+              <span>Fill Demo Credentials</span>
+            </button>
+          </div>
 
         </div>
+
+        {/* Signup Redirect Footer */}
+        <p className="text-center text-dark-400 text-xs">
+          Don't have an account yet?{' '}
+          <Link to="/register" className="text-primary-400 hover:text-primary-300 font-semibold transition-colors">
+            Create account free
+          </Link>
+        </p>
+
       </div>
     </div>
   );

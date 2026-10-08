@@ -1,12 +1,13 @@
 import api from './api';
 
 export const analysisService = {
-  // Unified analyze endpoint - sends all selected analysis types in one request
-  analyze: async (code, language, analysisTypes = ['explain']) => {
+  // Unified analyze endpoint - sends all selected analysis types and AI mode in one request
+  analyze: async (code, language, analysisTypes = ['explain'], aiMode = 'standard') => {
     const response = await api.post('/analyze', { 
       code, 
       language,
-      analysisTypes 
+      analysisTypes,
+      aiMode
     });
     return response.data;
   },
@@ -68,6 +69,12 @@ export const analysisService = {
   // Get analysis history
   getHistory: async (page = 1, limit = 10) => {
     const response = await api.get(`/history?page=${page}&limit=${limit}`);
+    return response.data;
+  },
+
+  // Get statistics
+  getStats: async () => {
+    const response = await api.get('/history/stats');
     return response.data;
   },
 

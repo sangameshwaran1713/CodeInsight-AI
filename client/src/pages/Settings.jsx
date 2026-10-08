@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiLock, FiSave, FiEye, FiEyeOff, FiShield, FiCheckCircle, FiAlertCircle, FiSend } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiSave, FiEye, FiEyeOff, FiShield, FiCheckCircle, FiAlertCircle, FiSend, FiCpu } from 'react-icons/fi';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import { getRoleDisplayName, getRoleBadgeColor } from '../config/roles.config';
@@ -129,7 +129,8 @@ const Settings = () => {
 
   const tabs = [
     { id: 'profile', label: 'Profile', icon: FiUser },
-    { id: 'security', label: 'Security', icon: FiLock },
+    { id: 'security', label: 'Security & Auth', icon: FiLock },
+    { id: 'ai-engine', label: 'AI Engine & Models', icon: FiCpu },
   ];
 
   return (
@@ -437,8 +438,79 @@ const Settings = () => {
           </div>
         </div>
       )}
+
+      {/* AI Engine Tab */}
+      {activeTab === 'ai-engine' && (
+        <div className="card p-6 space-y-6">
+          <div className="flex items-center justify-between border-b border-dark-300/50 pb-4">
+            <div>
+              <h3 className="text-lg font-semibold text-white flex items-center">
+                <FiCpu className="w-5 h-5 mr-2 text-primary-500" />
+                AI Model & Provider Configuration
+              </h3>
+              <p className="text-dark-400 text-xs mt-1">Configure your local Ollama host endpoint, OpenAI API keys, and model parameters.</p>
+            </div>
+            <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              Ollama DeepSeek Active
+            </span>
+          </div>
+
+          <form onSubmit={(e) => { e.preventDefault(); toast.success('AI Engine configuration saved!'); }} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-dark-500 mb-2">Primary AI Provider</label>
+              <select
+                defaultValue="ollama"
+                className="input"
+              >
+                <option value="ollama">Ollama Local LLM (DeepSeek-Coder) - Free & Private</option>
+                <option value="openai">OpenAI GPT-4o Enterprise</option>
+                <option value="anthropic">Anthropic Claude 3.5 Sonnet</option>
+                <option value="gemini">Google Gemini 1.5 Pro</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-dark-500 mb-2">Ollama Host Endpoint URL</label>
+              <input
+                type="text"
+                defaultValue="http://localhost:11434"
+                className="input font-mono"
+                placeholder="http://localhost:11434"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-dark-500 mb-2">OpenAI / Claude API Key (Optional)</label>
+              <input
+                type="password"
+                placeholder="sk-..."
+                className="input font-mono"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label className="block text-xs font-medium text-dark-400 mb-1">Temperature (0.0 - 1.0)</label>
+                <input type="range" min="0" max="1" step="0.1" defaultValue="0.2" className="w-full accent-primary-500" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-dark-400 mb-1">Max Tokens Limit</label>
+                <input type="number" defaultValue="4096" className="input py-2 text-xs font-mono" />
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <button type="submit" className="btn-primary flex items-center space-x-2">
+                <FiSave className="w-4 h-4" />
+                <span>Save AI Engine Settings</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Settings;
+

@@ -40,7 +40,7 @@ exports.register = async (req, res, next) => {
 
     // Send verification email with both link and OTP
     const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email/${verificationToken}`;
-    
+
     try {
       await sendEmail(user.email, 'verifyEmail', {
         name: user.name,
@@ -282,7 +282,7 @@ exports.resendVerification = async (req, res, next) => {
 
     // Send verification email with both link and OTP
     const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email/${verificationToken}`;
-    
+
     await sendEmail(user.email, 'verifyEmail', {
       name: user.name,
       verificationUrl,

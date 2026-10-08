@@ -24,7 +24,7 @@
 
   #root {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    background: linear-gradient(135deg, #0b0906 0%, #17140e 50%, #0b0906 100%);
     background-attachment: fixed;
   }
 
@@ -35,65 +35,54 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-dark-200/50;
+    @apply bg-dark-900;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-dark-400 rounded-full;
+    @apply bg-primary-700/60 rounded-full;
     border: 2px solid transparent;
     background-clip: padding-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary-500/50;
+    @apply bg-primary-500;
   }
 
   /* Selection color */
   ::selection {
-    background-color: rgba(14, 165, 233, 0.3);
-    color: white;
+    background-color: rgba(192, 178, 131, 0.4);
+    color: #f3f0e6;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300 
-           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-100
-           disabled:opacity-50 disabled:cursor-not-allowed
-           transform active:scale-[0.98];
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-950 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-[0.98];
   }
 
   .btn-primary {
-    @apply btn bg-gradient-to-r from-primary-500 to-primary-600 text-white 
-           hover:from-primary-600 hover:to-primary-700 hover:shadow-lg hover:shadow-primary-500/25
-           focus:ring-primary-500 active:from-primary-700 active:to-primary-800;
+    @apply btn bg-gradient-to-r from-primary-500 via-primary-400 to-primary-600 text-dark-950 font-bold hover:from-primary-400 hover:to-primary-500 hover:shadow-lg hover:shadow-primary-500/30 focus:ring-primary-500 active:from-primary-600 active:to-primary-700;
   }
 
   .btn-secondary {
-    @apply btn bg-dark-300/50 text-dark-600 hover:bg-dark-300 
-           hover:text-white focus:ring-dark-400 backdrop-blur-sm
-           border border-dark-400/50 hover:border-dark-400;
+    @apply btn bg-dark-800/80 text-primary-200 hover:bg-dark-700 hover:text-white focus:ring-primary-500 backdrop-blur-sm border border-primary-500/30 hover:border-primary-500/60;
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-500/50 text-primary-400 bg-primary-500/5
-           hover:bg-primary-500 hover:text-white hover:border-primary-500
-           hover:shadow-lg hover:shadow-primary-500/20 focus:ring-primary-500;
+    @apply btn border-2 border-primary-500/60 text-primary-300 bg-primary-500/10 hover:bg-primary-500 hover:text-dark-950 hover:border-primary-400 hover:shadow-lg hover:shadow-primary-500/25 focus:ring-primary-500 font-semibold;
   }
 
   .btn-danger {
-    @apply btn bg-gradient-to-r from-red-500 to-red-600 text-white 
-           hover:from-red-600 hover:to-red-700 hover:shadow-lg hover:shadow-red-500/25
-           focus:ring-red-500;
+    @apply btn bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 hover:shadow-lg hover:shadow-red-500/25 focus:ring-red-500;
   }
 
   .btn-ghost {
-    @apply btn bg-transparent text-dark-400 hover:text-white hover:bg-dark-300/50;
+    @apply btn bg-transparent text-dark-300 hover:text-white hover:bg-dark-800/60;
   }
 
   .btn-glow {
     @apply btn-primary relative overflow-hidden;
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 0 22px rgba(192, 178, 131, 0.45);
   }
 
   .btn-glow::before {
@@ -103,21 +92,16 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-      45deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
+    background: linear-gradient(45deg,
+        transparent,
+        rgba(243, 240, 230, 0.3),
+        transparent);
     transform: rotate(45deg);
     animation: btn-shine 3s infinite;
   }
 
   .input {
-    @apply w-full px-4 py-3 rounded-xl bg-dark-300/50 border border-dark-400/50
-           text-white placeholder-dark-500 transition-all duration-300
-           focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50
-           focus:bg-dark-300/70 backdrop-blur-sm;
+    @apply w-full px-4 py-3 rounded-xl bg-dark-900/80 border border-primary-500/30 text-white placeholder-dark-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400 focus:bg-dark-900 backdrop-blur-sm;
   }
 
   .input-group {
@@ -129,7 +113,7 @@
   }
 
   .input-group-icon {
-    @apply absolute left-4 top-1/2 -translate-y-1/2 text-dark-500 transition-colors duration-300;
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-dark-400 transition-colors duration-300;
   }
 
   .input-group:focus-within .input-group-icon {
@@ -137,13 +121,11 @@
   }
 
   .card {
-    @apply bg-dark-200/80 rounded-2xl border border-dark-300/50 shadow-xl
-           backdrop-blur-xl;
+    @apply bg-dark-900/90 rounded-2xl border border-primary-500/20 shadow-xl backdrop-blur-xl;
   }
 
   .card-hover {
-    @apply card hover:border-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/5 
-           transition-all duration-500 hover:-translate-y-1;
+    @apply card hover:border-primary-500/50 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1;
   }
 
   .card-glow {
@@ -157,12 +139,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(14, 165, 233, 0.1),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(192, 178, 131, 0.15),
+        transparent);
     transition: left 0.5s ease;
   }
 
@@ -171,19 +151,15 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-400 via-cyan-400 to-primary-500 
-           bg-clip-text text-transparent bg-[length:200%_auto]
-           animate-gradient;
+    @apply bg-gradient-to-r from-primary-300 via-primary-400 to-ivory-100 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient;
   }
 
   .gradient-text-static {
-    @apply bg-gradient-to-r from-primary-400 to-cyan-400 
-           bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-400 via-primary-300 to-ivory-100 bg-clip-text text-transparent;
   }
 
   .glass {
-    @apply bg-dark-200/60 backdrop-blur-2xl border border-dark-300/30
-           shadow-xl shadow-black/10;
+    @apply bg-dark-900/80 backdrop-blur-2xl border border-primary-500/30 shadow-xl shadow-black/40;
   }
 
   .glass-card {
@@ -192,22 +168,16 @@
 
   /* Floating label input */
   .floating-input {
-    @apply peer w-full px-4 pt-6 pb-2 rounded-xl bg-dark-300/50 border border-dark-400/50
-           text-white placeholder-transparent transition-all duration-300
-           focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50;
+    @apply peer w-full px-4 pt-6 pb-2 rounded-xl bg-dark-300/50 border border-dark-400/50 text-white placeholder-transparent transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50;
   }
 
   .floating-label {
-    @apply absolute left-4 top-4 text-dark-500 transition-all duration-300
-           peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
-           peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary-400
-           peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs;
+    @apply absolute left-4 top-4 text-dark-500 transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary-400 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs;
   }
 
   /* Tabs */
   .tab-button {
-    @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300
-           text-dark-400 hover:text-white relative;
+    @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-dark-400 hover:text-white relative;
   }
 
   .tab-button.active {
@@ -216,8 +186,7 @@
 
   .tab-button.active::after {
     content: '';
-    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 
-           bg-gradient-to-r from-primary-400 to-cyan-400 rounded-full;
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-primary-400 to-cyan-400 rounded-full;
   }
 
   /* Badge */
@@ -248,10 +217,7 @@
 
   .tooltip::after {
     content: attr(data-tooltip);
-    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5
-           bg-dark-300 text-white text-xs rounded-lg opacity-0
-           pointer-events-none transition-all duration-200 whitespace-nowrap
-           border border-dark-400/50 shadow-lg;
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-dark-300 text-white text-xs rounded-lg opacity-0 pointer-events-none transition-all duration-200 whitespace-nowrap border border-dark-400/50 shadow-lg;
   }
 
   .tooltip:hover::after {
@@ -344,21 +310,33 @@
 
   .animate-shimmer {
     animation: shimmer 2s infinite;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.05),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent);
     background-size: 200% 100%;
   }
 
   /* Stagger delays for animations */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
 
   /* Hover effects */
   .hover-lift {
@@ -418,8 +396,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
@@ -427,6 +410,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -438,6 +422,7 @@
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -449,6 +434,7 @@
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -460,6 +446,7 @@
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -471,6 +458,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -482,12 +470,15 @@
     opacity: 0;
     transform: scale(0.3);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -495,9 +486,12 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -507,25 +501,45 @@
   from {
     box-shadow: 0 0 10px rgba(14, 165, 233, 0.2), 0 0 20px rgba(14, 165, 233, 0.1);
   }
+
   to {
     box-shadow: 0 0 20px rgba(14, 165, 233, 0.4), 0 0 40px rgba(14, 165, 233, 0.2);
   }
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes btn-shine {
-  0% { left: -50%; }
-  50%, 100% { left: 100%; }
+  0% {
+    left: -50%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes pulse-ring {
@@ -533,6 +547,7 @@
     transform: scale(0.8);
     opacity: 1;
   }
+
   100% {
     transform: scale(2);
     opacity: 0;
@@ -549,15 +564,20 @@
 }
 
 @keyframes blob {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
+
   25% {
     transform: translate(20px, -30px) scale(1.1);
   }
+
   50% {
     transform: translate(-20px, 20px) scale(0.9);
   }
+
   75% {
     transform: translate(30px, 10px) scale(1.05);
   }
@@ -565,6 +585,13 @@
 
 /* Slide-in animation for analysis carousel */
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(18px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

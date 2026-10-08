@@ -26,7 +26,6 @@ The platform combines a **React frontend** with a **Monaco code editor**, a **No
 Key differentiators:
 - **No cloud AI costs** — uses Ollama to run models locally (tested with `gpt-oss:120b-cloud`)
 - **Real code execution** — run Python, JavaScript, and Java directly in the browser with output
-- **Dry Run** — trace code logic step-by-step using AI without actually executing it
 - **Production-grade security** — 30+ security patches, JWT auth, rate limiting, RBAC
 
 ---
@@ -57,7 +56,7 @@ Key differentiators:
 │   React + Vite (localhost:3000)                             │
 │   ┌─────────────┐  ┌──────────┐  ┌──────────────────────┐  │
 │   │ Monaco      │  │ Output   │  │ Analysis Summary      │  │
-│   │ Code Editor │  │ Panel    │  │ + Dry Run Trace       │  │
+│   │ Code Editor │  │ Panel    │  │                      │  │
 │   └─────────────┘  └──────────┘  └──────────────────────┘  │
 └───────────────────────┬─────────────────────────────────────┘
                         │ HTTP (Axios)
@@ -257,7 +256,6 @@ Opens at **http://localhost:3000**
 - **🧠 Local LLM** — Ollama integration, no cloud API needed
 - **🖥️ Monaco Editor** — VS Code-quality editor in the browser
 - **▶️ Code Execution** — Run Python, JavaScript, Java with stdin support
-- **🔍 Dry Run** — AI traces execution logic without running code
 - **📊 Analysis Carousel** — Sliding tab UI for switching between analysis types
 - **🌌 Animated UI** — WebGL hex shader (login page), Space starfield background
 - **🔐 Full Auth** — JWT, bcrypt (rounds 14), email verification, OTP, password reset
